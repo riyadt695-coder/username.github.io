@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For my dearest</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    :root {
+      --gold: #FFD700;
+      --rose: #FF6B8B;
+      --dark-rose: #E75480;
+      --light-pink: #FFE6F0;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+                  url('https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+      background-size: cover;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 60px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      animation: fadeIn 1.5s ease;
+      max-width: 650px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+      transform: rotate(30deg);
+      z-index: -1;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4.5em;
+      margin-bottom: 20px;
+      color: var(--gold);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 1.3em;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 18px 45px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.2) 50%, transparent 75%);
+      background-size: 400% 400%;
+      z-index: -1;
+      transition: all 0.6s ease;
+      opacity: 0;
+    }
+
+    .btn:hover::before {
+      opacity: 1;
+      animation: shine 2s infinite;
+    }
+
+    @keyframes shine {
+      0% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .btn.yes {
+      background-color: var(--rose);
+      color: white;
+    }
+
+    .btn.yes:hover {
+      background-color: var(--dark-rose);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(230, 0, 57, 0.4);
+    }
+
+    .btn.no {
+      background-color: rgba(255,255,255,0.9);
+      color: #333;
+    }
+
+    .btn.no:hover {
+      background-color: rgba(255,255,255,0.7);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .result-message {
+      font-size: 2.5em;
+      animation: fadeIn 1s ease-in-out;
+      margin: 30px 0;
+    }
+
+    .happy {
+      color: var(--light-pink);
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .sad {
+      color: #ffaaaa;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    }
+
+    .floating-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      opacity: 0;
+      font-size: 24px;
+      color: var(--rose);
+      animation: float 6s ease-in infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-500px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .ring {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: url('https://cdn-icons-png.flaticon.com/512/106/106815.png') no-repeat center center;
+      background-size: contain;
+      opacity: 0.8;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 20px;
+        width: 90%;
+      }
+      
+      h1 {
+        font-size: 3.2em;
+      }
+
+      p {
+        font-size: 1.1em;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        font-size: 1em;
+      }
+
+      .result-message {
+        font-size: 1.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="proposalBox">
+    <h1 class="animate__animated animate__fadeInDown">My Dearest Nourin,</h1>
+    <p class="animate__animated animate__fadeIn animate__delay-1s">
+      From the moment our paths crossed, my life transformed into something magical.<br>
+      Your laughter is my favorite melody, your love my greatest treasure.<br><br>
+      Today, with all my heart, I ask you...<br><br>
+      <strong style="font-size: 1.5em; color: var(--gold);">Will you love me?</strong>
+    </p>
+    <div class="buttons animate__animated animate__fadeIn animate__delay-2s">
+      <button class="btn yes" onclick="showMessage('happy')">Yes, Forever!</button>
+      <button class="btn no" id="noBtn">I Need Time</button>
+    </div>
+  </div>
+
+  <div class="floating-hearts" id="heartsContainer"></div>
+
+  <script>
+    function showMessage(feeling) {
+      const box = document.getElementById('proposalBox');
+      let message = '';
+      
+      if (feeling === 'happy') {
+        message = `
+          <h1 class="result-message happy animate__animated animate__heartBeat">Yes! I'm Overjoyed! 💍</h1>
+          <p class="animate__animated animate__fadeIn">This is the beginning of our forever. I love you more than words can express.</p>
+          <div class="ring animate__animated animate__zoomIn animate__delay-1s"></div>
+        `;
+        createHearts(50);
+      } else {
+        message = `
+          <h1 class="result-message sad animate__animated animate__shakeX">My Heart Aches 💔</h1>
+          <p class="animate__animated animate__fadeIn">I'll keep loving you until you change your mind...</p>
+        `;
+      }
+      
+      box.innerHTML = message;
+      box.style.textAlign = 'center';
+    }
+
+    function createHearts(count) {
+      const container = document.getElementById('heartsContainer');
+      container.innerHTML = '';
+      
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = (Math.random() * 100 + 100) + 'vh';
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        container.appendChild(heart);
+      }
+    }
+
+    // Make the No button harder to click
+    const noBtn = document.getElementById('noBtn');
+    noBtn.addEventListener('mouseover', function() {
+      const x = Math.random() * (window.innerWidth - this.offsetWidth);
+      const y = Math.random() * (window.innerHeight - this.offsetHeight);
+      this.style.position = 'absolute';
+      this.style.left = x + 'px';
+      this.style.top = y + 'px';
+    });
+
+    noBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      showMessage('sad');
+    });
+
+    // Initial floating hearts
+    createHearts(15);
+  </script>
+</body>
+</html>
